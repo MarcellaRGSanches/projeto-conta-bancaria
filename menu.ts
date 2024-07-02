@@ -1,14 +1,15 @@
 import readlinesync = require("readline-sync");
-
+import { colors } from './src/util/Colors';
 export function main() {
 
     let opcao: number;
 
     while (true) {
 
-        console.log("*****************************************************");
+        console.log(colors.bg.black, colors.fg.magenta,
+            "******************************************************");
         console.log("                                                     ");
-        console.log("                BANCO DO BRAZIL COM Z                ");
+        console.log("                      MBANK                          ");
         console.log("                                                     ");
         console.log("*****************************************************");
         console.log("                                                     ");
@@ -23,13 +24,14 @@ export function main() {
         console.log("            9 - Sair                                 ");
         console.log("                                                     ");
         console.log("*****************************************************");
-        console.log("                                                     ");
+        console.log("                                                     ",
+            colors.reset);
 
         console.log("Entre com a opção desejada: ");
         opcao = readlinesync.questionInt("");
 
         if (opcao == 9) {
-            console.log("\nBanco do Brazil com Z - O seu Futuro começa aqui!");
+            console.log(colors.bg.black, colors.fg.magentastrong,"\nMBank, o seu dinheiro com a gente!",colors.reset);
             sobre();
             process.exit(0);
         }
@@ -79,11 +81,11 @@ export function main() {
 
 
 export function sobre(): void {
-    console.log("\n*****************************************************");
-    console.log("Projeto Desenvolvido por: Marcella Sanches");
-    console.log("Generation Brasil - marcella.sanches@genstudents.org");
+    console.log(colors.bg.black, colors.fg.magenta,"\n*****************************************************");
+    console.log("Projeto Desenvolvido por: Marcella R.G. Sanches");
+    console.log("Generation Brasil - marcella.sanches@genstudents.org ou rochaamarcellaaa@gmail.com");
     console.log("https://github.com/MarcellaRGSanches");
-    console.log("*****************************************************");
+    console.log("*****************************************************",colors.reset);
 }
 
 main();
