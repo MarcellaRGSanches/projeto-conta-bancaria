@@ -1,13 +1,37 @@
 import readlinesync = require("readline-sync");
 import { colors } from './src/util/Colors';
+import { Conta } from "./src/model/Conta";
 export function main() {
 
     let opcao: number;
 
+    //Objetos da classe conta
+    const c1: Conta = new Conta(1, 1234, 1, "Julia Castro", 800000.00);
+    const c2: Conta = new Conta(2, 1234, 2, "Marcella Sanches", 600000.00);
+
+    //Visualizando os dados da conta 1 e 2 
+    c1.visualizar();
+    c2.visualizar();
+    
+    //visualizando saldo da conta 1 
+    console.log(`\nO saldo da conta 01 é: ${c1.saldo}`);
+    
+    //alterando o saldo da conta 2 
+    c2.saldo = 900000.00
+    
+    //visualizando o saldo da conta 2 
+    console.log(`\nO saldo da conta 02 é: ${c2.saldo}`);
+    
+    //Saquee deposito nas contas 
+    console.log(`\nSacar tantos reais da Conta c1: ${c1.sacar(500000.20)}`);
+    console.log(`\nDepositar 300000.00 reais da Conta c2: ${c2.depositar(300000.25)}`);
+    c1.visualizar();
+    c2.visualizar();
+    
     while (true) {
 
         console.log(colors.bg.black, colors.fg.magenta,
-            "******************************************************");
+                   "******************************************************");
         console.log("                                                     ");
         console.log("                      MBANK                          ");
         console.log("                                                     ");
