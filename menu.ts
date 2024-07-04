@@ -1,37 +1,38 @@
 import readlinesync = require("readline-sync");
 import { colors } from './src/util/Colors';
 import { Conta } from "./src/model/Conta";
+import { ContaCorrente } from "./src/model/ContaCorrente";
+import { ContaPoupanca } from "./src/model/ContaPoupanca";
 export function main() {
 
     let opcao: number;
 
-    //Objetos da classe conta
-    const c1: Conta = new Conta(1, 1234, 1, "Julia Castro", 800000.00);
-    const c2: Conta = new Conta(2, 1234, 2, "Marcella Sanches", 600000.00);
+    //Novas Instâncias da Classe ContaCorrente (Objetos)
+    const cc1: ContaCorrente = new ContaCorrente(3, 1234, 1, "Amanda Magro", 1000000.00, 100000);
+    const cc2: ContaCorrente = new ContaCorrente(4, 1234, 1, "João da Silva", 1000.00, 100);
+    //Nova Instância da Classe Conta Poupança(objetos)
+    const cc3: ContaPoupanca = new ContaPoupanca(5, 1234, 1, "Marcella Sanches", 60000, 18);
 
-    //Visualizando os dados da conta 1 e 2 
-    c1.visualizar();
-    c2.visualizar();
+    cc1.visualizar();
+    cc2.visualizar();
+    cc3.visualizar();
+
+    console.log(`\n Saque de R$ 25.000,00 na conta CC1: ${cc1.sacar(25000)}`);
+    cc1.visualizar();
+
+    console.log(`\n Saque de R$ 1.500,00 na conta CC2: ${cc2.sacar(1500)}`);
+    cc2.visualizar();
     
-    //visualizando saldo da conta 1 
-    console.log(`\nO saldo da conta 01 é: ${c1.saldo}`);
-    
-    //alterando o saldo da conta 2 
-    c2.saldo = 900000.00
-    
-    //visualizando o saldo da conta 2 
-    console.log(`\nO saldo da conta 02 é: ${c2.saldo}`);
-    
-    //Saquee deposito nas contas 
-    console.log(`\nSacar tantos reais da Conta c1: ${c1.sacar(500000.20)}`);
-    console.log(`\nDepositar 300000.00 reais da Conta c2: ${c2.depositar(300000.25)}`);
-    c1.visualizar();
-    c2.visualizar();
-    
+    console.log(`\nSaque de R$ 1500,55 na conta CC3: ${cc3.sacar(1500.55)}`)
+    cc3.visualizar();
+
+
+
+
     while (true) {
 
         console.log(colors.bg.black, colors.fg.magenta,
-                   "******************************************************");
+            "******************************************************");
         console.log("                                                     ");
         console.log("                      MBANK                          ");
         console.log("                                                     ");
@@ -55,7 +56,7 @@ export function main() {
         opcao = readlinesync.questionInt("");
 
         if (opcao == 9) {
-            console.log(colors.bg.black, colors.fg.magentastrong,"\nMBank, o seu dinheiro com a gente!",colors.reset);
+            console.log(colors.bg.black, colors.fg.magentastrong, "\nMBank, o seu dinheiro com a gente!", colors.reset);
             sobre();
             process.exit(0);
         }
@@ -105,11 +106,11 @@ export function main() {
 
 
 export function sobre(): void {
-    console.log(colors.bg.black, colors.fg.magenta,"\n*****************************************************");
+    console.log(colors.bg.black, colors.fg.magenta, "\n*****************************************************");
     console.log("Projeto Desenvolvido por: Marcella R.G. Sanches");
     console.log("Generation Brasil - marcella.sanches@genstudents.org ou rochaamarcellaaa@gmail.com");
     console.log("https://github.com/MarcellaRGSanches");
-    console.log("*****************************************************",colors.reset);
+    console.log("*****************************************************", colors.reset);
 }
 
 main();
