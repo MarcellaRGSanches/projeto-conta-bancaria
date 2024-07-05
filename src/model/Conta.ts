@@ -1,4 +1,4 @@
-export class Conta {
+export abstract class Conta {
     // Definir os atibrutos da classe (caracteristicas) 
     private _numero: number;         //sempre que for uma caracteristica privada tem que colcoar o underline na frente 
     private _agencia: number;
@@ -85,7 +85,9 @@ export class Conta {
         console.log(` Titular da conta: ${this._titular}`);
         console.log(` Saldo da conta: ${this._saldo.toFixed(2)}`);
 
+
     }
+ 
 
 }
 
