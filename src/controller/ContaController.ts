@@ -8,44 +8,54 @@ export class ContaController implements ContaRepository {
     procurarPorNumero(numero: number): void {
         let buscaConta = this.buscarNoArray(numero);
 
-        if(buscaConta != null){
+        if (buscaConta != null) {
             buscaConta.visualizar();
-        }else {
-            console.log('\nA Conta numero: '+ numero + 'não foi encontrada');
+        } else {
+            console.log('\nA Conta numero: ' + numero + ' não foi encontrada');
         }
-        // throw new Error("Method not implemented.");
-    }
 
+    }
     listarTodas(): void {
         for (let conta of this.listaContas) {
             conta.visualizar();
         }
-        // throw new Error("Method not implemented.");
-    }
 
+    }
     cadastrar(conta: Conta): void {
         this.listaContas.push(conta);
-        console.log("\nA conta número: " + conta.numero + "foi criada com sucesso!");
-        throw new Error("Method not implemented.");
-    }
+        console.log("\nA conta número: " + conta.numero + " foi criada com sucesso!");
 
+    }
     atualizar(conta: Conta): void {
-        throw new Error("Method not implemented.");
-    }
+        let buscaConta = this.buscarNoArray(conta.numero);
 
+        if (buscaConta != null) {
+            this.listaContas[this.listaContas.indexOf(buscaConta)] = conta;
+            console.log('\nA conta numero: ' + conta.numero + ' foi atualizaado com sucesso!');
+        } else {
+            console.log('\nA conta de numero: ' + conta.numero + 'nao foi encontrada!');
+        }
+
+    }
     deletar(numero: number): void {
-        throw new Error("Method not implemented.");
-    }
+        let buscaConta = this.buscarNoArray(numero);
 
+        if (buscaConta != null) {
+            this.listaContas.splice(this.listaContas.indexOf(buscaConta), 1);//INDEXoF PRA ENCONTRAR O INDICE, o 1 é pra excluir um unico elemento  
+            console.log("\nA conta numero: " + numero + "foi apagada com sucesso!");
+        } else {
+            console.log("\nA conta numero: " + numero + "nao foi encontrada!")
+        }
+
+    }
     sacar(numero: number, valor: number): void {
-        throw new Error("Method not implemented.");
     }
 
     depositar(numero: number, valor: number): void {
-        throw new Error("Method not implemented.");
+
     }
     transferir(numeroOrigem: number, numeroDestino: number, valor: number): void {
-        throw new Error("Method not implemented.");
+
     }
 
     //Métodos Auxiliares
@@ -56,9 +66,9 @@ export class ContaController implements ContaRepository {
         return ++this.numero;
     }
     public buscarNoArray(numero: number): Conta | null {
-        for (let conta of this.listaContas){
-            if(conta.numero === numero)
-            return conta;
+        for (let conta of this.listaContas) {
+            if (conta.numero === numero)
+                return conta;
         }
         return null;
     }
