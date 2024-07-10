@@ -65,7 +65,7 @@ export abstract class Conta {
     
     //metodo para visualizar todos os dados do objeto*****
     public visualizar(): void {
-
+        
         let tipo: string = "";
         switch (this._tipo) {
             case 1:

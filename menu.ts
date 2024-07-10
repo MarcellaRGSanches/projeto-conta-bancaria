@@ -12,7 +12,7 @@ export function main() {
     //Variaveis Auxiliares 
     let opcao, numero, agencia, tipo, saldo, limite, aniversario: number;
     let titular: string;
-    const tipoContas = ['Conta Corrente', 'Conta Poupança'];
+    const tipoContas = ['Conta Corrente', 'Conta Poupanca'];
 
     while (true) {
         console.log(colors.bg.black, colors.fg.magenta,
@@ -67,11 +67,14 @@ export function main() {
                     case 1:
                         console.log("Digite o Limite da Conta");
                         limite = readlinesync.questionFloat("");
+                        contas.cadastrar(
+                            new ContaCorrente(contas.gerarNumero(), agencia, tipo, titular,saldo, limite));
                         break;
 
                     case 2:
                         console.log("Digite a Data de Aniversario da Conta");
                         aniversario = readlinesync.questionInt("");
+                        contas.cadastrar(new ContaPoupanca(contas.gerarNumero(), agencia, tipo, titular,saldo, aniversario));
                         break;
                 }
                 keyPress()
@@ -94,11 +97,49 @@ export function main() {
 
             case 4:
                 console.log("\n\nAtualizar dados da Conta\n\n");
+
+                console.log("\nDigite o numero da conta: ");
+                numero = readlinesync.questionInt("");
+                
+                let conta  = contas.buscarNoArray(numero);
+
+                if(conta != null){
+                    console.log("Digite o numero da agencia: ");
+                    agencia = readlinesync.questionInt("");
+
+                    console.log("Digite o nome do titular da conta: ");
+                    titular = readlinesync.question("");
+
+                    tipo = conta.tipo;
+
+                    console.log("Digite o saldo da conta (R$): ");
+                    saldo = readlinesync.questionInt("");
+
+                    switch(tipo){
+                        case 1:
+                            console.log("Digite o limite da conta (R$): ");
+                            limite = readlinesync.questionFloat(" ");
+                            contas.atualizar(new ContaCorrente(numero, agencia, tipo, titular, saldo, limite));
+                        break;
+                        case 2:
+                            console.log("Digite o dia do aniversario da conta poupanca: ");
+                            aniversario = readlinesync.questionInt(" ");
+                            contas.atualizar(new ContaPoupanca(numero, agencia, tipo, titular, saldo, aniversario));
+                        break;
+                    }
+                } else{
+                    console.log("\nA conta numero: " + numero + "nao foi encontrada!")
+                }
                 keyPress()
                 break;
 
             case 5:
                 console.log("\n\nApagar uma Conta\n\n");
+
+                console.log("Digite o numero da conta: ");
+                numero = readlinesync.questionInt(" ");
+                contas.deletar(numero);
+                
                 keyPress()
                 break;
 
