@@ -50,7 +50,7 @@ export abstract class Conta {
     //Metodo sacar dinheiro da conta ***************
     public sacar(valor: number): boolean {
         if (this._saldo < valor) {
-            console.log("Saldo é insufieciente!")
+            console.log("Saldo é insuficiente!")
             return false;
         }
         this._saldo = this._saldo - valor;

@@ -49,28 +49,49 @@ export class ContaController implements ContaRepository {
 
     }
     sacar(numero: number, valor: number): void {
+        let buscaConta = this.buscarNoArray(numero);
+
+        if (buscaConta != null) {
+            buscaConta.sacar(valor);
+            console.log("\nO saque foi efetuado com sucesso");
+        } else {
+            console.log("\nA conta não foi encontrada!");
+        }
     }
 
     depositar(numero: number, valor: number): void {
+        let buscaConta = this.buscarNoArray(numero);
 
+        if (buscaConta != null) {
+            buscaConta.depositar(valor);
+            console.log("\nO deposito foi efetuado com sucesso");
+        } else {
+            console.log("\nA conta não foi encontrada!");
+        }
     }
     transferir(numeroOrigem: number, numeroDestino: number, valor: number): void {
+        let buscaContaOrigem = this.buscarNoArray(numeroOrigem);
+        let buscaContaDestino = this.buscarNoArray(numeroDestino);
 
+        
+        if (buscaContaOrigem !== null && buscaContaDestino !== null) {
+            (buscaContaOrigem.sacar(valor) === true);
+            buscaContaDestino.depositar(valor);
+            console.log("\nO transferencia foi feita com sucesso");
+        } else {
+            console.log("\nA conta não foi encontrada!");
+        }
     }
-
     //Métodos Auxiliares
-
     //Gerar número de conta 
-
     public gerarNumero(): number {
         return ++this.numero;
     }
-    public buscarNoArray(numero: number): Conta | null {
+    public buscarNoArray (numero: number): Conta | null {
         for (let conta of this.listaContas) {
             if (conta.numero === numero)
                 return conta;
         }
         return null;
     }
-
 }
